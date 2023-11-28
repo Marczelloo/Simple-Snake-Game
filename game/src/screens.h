@@ -33,6 +33,7 @@
 //----------------------------------------------------------------------------------
 typedef enum GameScreen { UNKNOWN = -1, LOGO = 0, TITLE, OPTIONS, GAMEPLAY, ENDING, EXIT } GameScreen;
 typedef enum Resolution { nHD = 1, HD = 2, HDP = 3, FHD = 4 } Resolution;
+typedef enum GameMode { CLASSIC = 1, ARCADE = 2 } GameMode;
 
 //----------------------------------------------------------------------------------
 // Global Variables Declaration (shared by several modules)
@@ -49,6 +50,11 @@ extern Resolution currentResolution;
 static int maxGridSizeWidth = 32;
 static int maxGridSizeHeight = 18;
 extern int gridSize;
+extern GameMode gameMode;
+
+static const std::string title_gameModeText_1 = "CHOOSE GAME MODE";
+static const std::string title_gameModeText_2 = "CLASSIC";
+static const std::string title_gameModeText_3 = "ARCADE";
 
 #ifdef __cplusplus
 extern "C" {            // Prevents name mangling of functions

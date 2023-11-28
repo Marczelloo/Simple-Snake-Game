@@ -1,0 +1,13 @@
+﻿  raudio.c
+C:\Important shit\Raylib\game-premake-main\raylib-master\src\external\jar_xm.h(242,1): warning C4005: "DEBUG": ponowna definicja makra
+C:\Important shit\Raylib\game-premake-main\raylib-master\src\external\jar_xm.h(242,1): message : Element „DEBUG“ został wcześniej zadeklarowany w wierszu polecenia
+  rcore.c
+  rglfw.c
+  rmodels.c
+  rshapes.c
+  rtext.c
+  rtextures.c
+  utils.c
+  Generowanie kodu...
+C:\Important shit\Raylib\game-premake-main\raylib-master\src\external\miniaudio.h(76810): warning C4715: "ma_sound_get_cursor_in_pcm_frames”: niewszystkie ścieżki kodu zwracają wartość
+  raylib.vcxproj -> C:\Important shit\Raylib\game-premake-main\_bin\Debug\raylib.lib
