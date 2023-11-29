@@ -34,12 +34,15 @@ void Fruit::SpawnNew(Vector2 snakehead, SnakeBody* snakebody, int snakeBodySize)
 	int maxRangeX = maxGridSizeWidth;
 	int maxRangeY = maxGridSizeHeight;
 
+	std::cout << "body: " << snakebody[0].getPosition().x << " " << snakebody[0].getPosition().y << std::endl;
+	std::cout << "head: " << snakehead.x << " " << snakehead.y << std::endl;
+
 	int newRandomX = rand() % (maxRangeX - minRange) + minRange;
 	int newRandomY = rand() % (maxRangeY - minRange) + minRange;
 
 	if (newRandomX == snakehead.x)
 	{
-		while (newRandomX != snakehead.y)
+		while (newRandomX == snakehead.y)
 		{
 			newRandomX = rand() % (maxRangeX - minRange) + minRange;
 		}
@@ -47,20 +50,16 @@ void Fruit::SpawnNew(Vector2 snakehead, SnakeBody* snakebody, int snakeBodySize)
 	
 	if (newRandomY == snakehead.y)
 	{
-		while (newRandomY != snakehead.y);
+		while (newRandomY == snakehead.y);
 		{
 			newRandomY = rand() % (maxRangeY - minRange) + minRange;
 		}
 	}
 
-	std::cout << snakeBodySize << std::endl;
 	for (int i = 0; i < snakeBodySize; i++)
 	{
-		std::cout << "petla: " << i << std::endl;
-		std::cout << snakebody[i].getPosition().x << " " << snakebody[i].getPosition().y << std::endl;
 		if (newRandomY == snakebody[i].getPosition().y)
 		{
-			std::cout << "x rowny" << std::endl;
 			while (newRandomY == snakebody[i].getPosition().y)
 			{
 				newRandomY = rand() % (maxRangeY - minRange) + minRange;
@@ -69,7 +68,6 @@ void Fruit::SpawnNew(Vector2 snakehead, SnakeBody* snakebody, int snakeBodySize)
 
 		if (newRandomX == snakebody[i].getPosition().x)
 		{
-			std::cout << "y rowny" << std::endl;
 			while (newRandomX == snakebody[i].getPosition().x)
 			{
 				newRandomX = rand() % (maxRangeX - minRange) + minRange;

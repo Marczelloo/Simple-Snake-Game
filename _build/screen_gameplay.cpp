@@ -2,6 +2,7 @@
 #include "screens.h"
 #include "SnakeHead.h"
 #include "Fruit.h"
+#include "SpecialFruit.h"
 #include <iostream>
 #include <vector>
 #include "Strings.h"
@@ -18,6 +19,7 @@ State gameState = START;
 SnakeHead player;
 std::vector<SnakeBody> playerBody(1);
 Fruit fruit;
+SpecialFruit specialFruit;
 
 void InitGameplayScreen(void)
 {
@@ -30,7 +32,15 @@ void InitGameplayScreen(void)
 	playerBody = newPlayerBody;
 	playerBody[0] = SnakeBody(Vector2{ 10, 10}, Vector2{ 1, 1 }, GREEN, DARKGREEN);
 	fruit = Fruit(Vector2{0, 0}, Vector2{ .8, .8 }, RED);
+	specialFruit = SpecialFruit();
+	specialFruit.setSize(fruit.getSize());
+	specialFruit.setColor(BLUE);
 	fruit.SpawnNew(player.getPosition(), playerBody.data(), playerBody.size());
+
+	if (gameMode == ARCADE)
+	{
+		specialFruit.SpawnNew(player.getPosition(), playerBody.data(), playerBody.size(), fruit);
+	}
 }
 
 void UpdateGameplayScreen(void)
@@ -44,7 +54,7 @@ void UpdateGameplayScreen(void)
 			gameState = PLAYING;
 		}
 	}
-	//add increasing size lenght
+
 	if (gameState == PLAYING)
 	{
 		if (IsKeyPressed(KEY_P))
@@ -54,7 +64,7 @@ void UpdateGameplayScreen(void)
 
 		int const size = playerBody.size();
 
-		if (framesCounter % 10 == 0)
+		if (framesCounter % player.getFrameSpeed() == 0)
 		{
 			for (int i = size - 1; i > 0; i--)
 			{
@@ -73,10 +83,37 @@ void UpdateGameplayScreen(void)
 			playerBody.push_back(newSnakeBody);
 			
 			fruit.SpawnNew(player.getPosition(), playerBody.data(), playerBody.size());
+
+			if (gameMode == ARCADE)
+			{
+				if (!specialFruit.getActive())
+				{
+					specialFruit.SpawnNew(player.getPosition(), playerBody.data(), playerBody.size(), fruit);
+				}	
+			}
 			
 			score += 100;
 		}
-		
+
+		if (gameMode == ARCADE)
+		{
+			if (player.CheckCollisionWithSpecialFruit(specialFruit))
+			{
+				if (specialFruit.getActive())
+				{
+					player.addEffect(specialFruit.getEffect(), specialFruit.getDuration());
+
+					specialFruit.setActive(false);
+
+					SnakeBody newSnakeBody = SnakeBody(playerBody[size - 1].getPosition(), Vector2{ 1, 1 }, player.getColor(), player.getColorFrame());
+					playerBody.push_back(newSnakeBody);
+
+					score += 100;
+				}
+			}
+
+			player.UpdateEffectDuration();
+		}
 	}	
 
 	if (gameState == PAUSED)
@@ -127,6 +164,12 @@ void DrawGameplayScreen(void)
 		player.Draw();
 		fruit.Draw();
 		DrawGameplayHUD();
+
+		if (gameMode == ARCADE)
+		{
+			specialFruit.Draw();
+			player.DrawEffects();
+		}
 	}
 
 	if (gameState == PAUSED)

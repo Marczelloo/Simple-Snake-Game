@@ -13,16 +13,7 @@ int selectedVolume;
 selectedMenu optionsMenuSelection;
 bool optionsCanSwitchMenu;
 std::string displayResolution;
-/*
-640 x 360 (nHD)
-854 x 480 (FWVGA)
-960 x 540 (qHD)
-1024 x 576 (WSVGA)
-1280 x 720 (HD/WXGA)
-1366 x 768 (FWXGA)
-1600 x 900 (HD+)
-1920 x 1080 (FHD)
-*/
+
 void InitOptionsScreen(void)
 {
 	framesCounter = 0;

@@ -15,7 +15,7 @@ bool canSwitchMenu = true;
 bool canSelectMenu = true;
 bool showGameModeSelection = false;
 selectedGameMode selectedGameModeMenu = MENU_CLASSIC;
-
+GameMode gameMode;
 //----------------------------------------------------------------------------------
 // Title Screen Functions Definition
 //----------------------------------------------------------------------------------
@@ -70,15 +70,15 @@ void UpdateTitleScreen(void)
                 {
                     if (selectedGameModeMenu == MENU_CLASSIC)
                     {
-                        selectedGameModeMenu = MENU_CLASSIC;
+                        gameMode = CLASSIC;
                     }
                     else if (selectedGameModeMenu == MENU_ARCADE)
                     {
-                        selectedGameModeMenu = MENU_ARCADE;
+                        gameMode = ARCADE;
                     }
                     else
                     {
-                        selectedGameModeMenu = MENU_CLASSIC;
+                        gameMode = CLASSIC;
                     }
 
                     showGameModeSelection = false;
