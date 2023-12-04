@@ -41,7 +41,7 @@ typedef enum GameMode { CLASSIC = 1, ARCADE = 2 } GameMode;
 extern GameScreen currentScreen;
 extern Font font;
 extern Music music;
-extern Sound fxCoin;
+extern Sound menuEffect;
 extern std::string gameTitle;
 extern int screenWidth;
 extern int screenHeight;
@@ -77,6 +77,7 @@ void DrawOptionsScreen(void);
 void UnloadOptionsScreen(void);
 int FinishOptionsScreen(void);
 void OptionsManageResolutionChange(int);
+void HandleVolumeChange();
 
 
 // Gameplay Screen Functions Declaration

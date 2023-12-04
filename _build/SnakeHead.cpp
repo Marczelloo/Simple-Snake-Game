@@ -129,7 +129,7 @@ void SnakeHead::HandleDirectionChange()
 {
 	if (canChangeDir)
 	{
-		for each (SnakeEffect& se in snakeEffects)
+		for (auto& se : snakeEffects)
 		{
 			if (se.effect == INVERTED)
 			{
@@ -235,7 +235,11 @@ bool SnakeHead::CheckCollisionWithBody(SnakeBody* snakebody, int snakeBodySize)
 			snakebody[i].getSize().y * gridSize
 		};
 		
-		if (CheckCollisionRecs(headRec, bodyRec)) return true;
+		if (CheckCollisionRecs(headRec, bodyRec))
+		{
+			PlaySound(wallHit);
+			return true;
+		}
 	}
 
 	return false;
@@ -251,7 +255,11 @@ bool SnakeHead::CheckCollisionWithFruit(Fruit fruit)
 		fruit.getSize().y
 	};
 
-	if (CheckCollisionRecs(headRec, fruitRec)) return true;
+	if (CheckCollisionRecs(headRec, fruitRec))
+	{
+		PlaySound(fruitEat);
+		return true;
+	}
 
 	return false;
 }
@@ -266,14 +274,18 @@ bool SnakeHead::CheckCollisionWithSpecialFruit(SpecialFruit specialFruit)
 		specialFruit.getSize().y
 	};
 
-	if (CheckCollisionRecs(headRec, specialFruitRec)) return true;
+	if (CheckCollisionRecs(headRec, specialFruitRec))
+	{
+		PlaySound(specialFruitEat);
+		return true;
+	}
 	
 	return false;
 }
 
 bool SnakeHead::CheckCollisionWithBarriers()
 {
-	for each (SnakeEffect se  in snakeEffects)
+	for (auto& se : snakeEffects)
 	{
 		if (se.effect == PASSING)
 		{
@@ -298,8 +310,16 @@ bool SnakeHead::CheckCollisionWithBarriers()
 		}
 	}
 	
-	if (position.x >= screenWidth || position.x < 0) return true;
-	if (position.y >= screenHeight || position.y < 0) return true;
+	if (position.x >= screenWidth || position.x < 0)
+	{
+		PlaySound(wallHit);
+		return true;
+	}
+	if (position.y >= screenHeight || position.y < 0)
+	{
+		PlaySound(wallHit);
+		return true;
+	}
 	
 	return false;
 }
@@ -392,7 +412,7 @@ void SnakeHead::addEffect(Effect effect, float duration)
 
 void SnakeHead::UpdateEffectDuration()
 {
-	for each (SnakeEffect& se in snakeEffects)
+	for(auto& se : snakeEffects)
 	{
 		if (se.effect != NONE)
 		{
@@ -411,7 +431,7 @@ void SnakeHead::UpdateEffectDuration()
 void SnakeHead::DrawEffects()
 {
 	int index = 0;
-	for each (SnakeEffect& se in snakeEffects)
+	for (auto& se : snakeEffects)
 	{
 		//make icons in squares for diffrent effects
 		if (se.effect != NONE)
@@ -444,4 +464,11 @@ void SnakeHead::setFrameSpeed(int frameSpeed)
 int SnakeHead::getFrameSpeed()
 {
 	return frameSpeed;
+}
+
+void SnakeHead::UnloadSounds()
+{
+	UnloadSound(wallHit);
+	UnloadSound(fruitEat);
+	UnloadSound(specialFruitEat);
 }

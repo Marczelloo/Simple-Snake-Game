@@ -24,6 +24,9 @@ class SnakeHead {
 	int frameSpeed = 10;
 	bool canChangeDir = true;
 	SnakeEffect snakeEffects[4];
+	Sound wallHit = LoadSound("resources/wallHit.wav");
+	Sound fruitEat = LoadSound("resources/fruit.wav");
+	Sound specialFruitEat = LoadSound("resources/specialFruit.wav");
 public:
 	SnakeHead();
 	SnakeHead(Vector2 , Vector2, Color, Color, Direction, int);
@@ -37,6 +40,7 @@ public:
 	bool CheckCollisionWithSpecialFruit(SpecialFruit);
 	void UpdateEffectDuration();
 	void DrawEffects();
+	void UnloadSounds();
 
 	void setPosition(Vector2 );
 	void setSize(Vector2 );

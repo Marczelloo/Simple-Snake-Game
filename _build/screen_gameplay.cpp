@@ -7,8 +7,6 @@
 #include <vector>
 #include "Strings.h"
 
-//add scalability for all resolution for gameplay
-
 enum State { START, PLAYING, PAUSED, LOST};
 
 static int framesCounter = 0;
@@ -225,7 +223,7 @@ void DrawGameplayHUD(void)
 
 void UnloadGameplayScreen(void)
 {
-
+	player.UnloadSounds();
 }
 
 int FinishGameplayScreen(void)

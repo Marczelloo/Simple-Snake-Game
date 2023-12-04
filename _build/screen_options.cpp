@@ -8,10 +8,13 @@ static int finishScreen = 0;
 
 
 enum selectedMenu { OPTIONS_RESOLUTION = 1, OPTIONS_VOLUME = 2, OPTIONS_GOBACK = 3, OPTIONS_FULLSCREEN = 4 };
-int selectedVolume;
 
 selectedMenu optionsMenuSelection;
 bool optionsCanSwitchMenu;
+
+int selectedVolume;
+bool optionCanSwitchVolume;
+
 std::string displayResolution;
 
 void InitOptionsScreen(void)
@@ -48,8 +51,9 @@ void InitOptionsScreen(void)
         break;
     }
     scale = (float)currentResolution / FHD * 2;
-    selectedVolume = 5;
-
+    
+    selectedVolume = GetMasterVolume() * 10;
+    optionCanSwitchVolume = true;
 }
 
 void UpdateOptionsScreen(void)
@@ -58,6 +62,7 @@ void UpdateOptionsScreen(void)
     {
         if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
         {
+            PlaySound(menuEffect);
             optionsCanSwitchMenu = false;
             switch (optionsMenuSelection)
             {
@@ -81,6 +86,7 @@ void UpdateOptionsScreen(void)
 
         if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W))
         {
+            PlaySound(menuEffect);
             optionsCanSwitchMenu = false;
             switch (optionsMenuSelection)
             {
@@ -115,6 +121,7 @@ void UpdateOptionsScreen(void)
 
     if (IsKeyPressed(KEY_ENTER))
     {
+        PlaySound(menuEffect);
         if (optionsMenuSelection == OPTIONS_GOBACK)
         {
             finishScreen = TITLE;
@@ -128,13 +135,47 @@ void UpdateOptionsScreen(void)
 
     if (optionsMenuSelection == OPTIONS_RESOLUTION)
     {
-        if (IsKeyPressed(KEY_LEFT))
+        if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A))
         {
+            PlaySound(menuEffect);
             OptionsManageResolutionChange(0);
         }
-        else if (IsKeyPressed(KEY_RIGHT))
+        else if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D))
         {
+            PlaySound(menuEffect);
             OptionsManageResolutionChange(1);
+        }
+    }
+
+    HandleVolumeChange();
+}
+
+void HandleVolumeChange()
+{
+	if(IsKeyReleased(KEY_LEFT) || IsKeyReleased(KEY_A) && !IsKeyPressed(KEY_RIGHT) && !IsKeyPressed(KEY_D)) optionCanSwitchVolume = true;
+    if (IsKeyReleased(KEY_RIGHT) || IsKeyReleased(KEY_D) && !IsKeyPressed(KEY_LEFT) && !IsKeyPressed(KEY_A)) optionCanSwitchVolume = true;
+		
+    if (optionsMenuSelection == OPTIONS_VOLUME)
+    {
+        if (optionCanSwitchVolume)
+        {
+            if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A))
+            {
+                PlaySound(menuEffect);
+                optionCanSwitchVolume = false;
+                if (selectedVolume == 0) return;
+                selectedVolume--;
+                SetMasterVolume((float)selectedVolume / 10);
+            }
+
+            if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_D))
+            {
+                PlaySound(menuEffect);
+                optionCanSwitchVolume = false;
+                if (selectedVolume == 10) return;
+                selectedVolume++;
+                SetMasterVolume((float)selectedVolume / 10);
+            }
         }
     }
 }

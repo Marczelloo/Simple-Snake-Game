@@ -56,6 +56,6 @@ C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(103,11): warning
 C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(102,11): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
 C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(101,41): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
 C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(100,41): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
-C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(286,18): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(294,18): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(298,18): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Important shit\Raylib\game-premake-main\_build\SnakeHead.cpp(306,18): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
   game-premake-main.vcxproj -> C:\Important shit\Raylib\game-premake-main\_bin\Debug\game-premake-main.exe

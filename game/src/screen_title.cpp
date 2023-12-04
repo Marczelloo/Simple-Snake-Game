@@ -54,6 +54,7 @@ void UpdateTitleScreen(void)
         {
             if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S) || IsKeyDown(KEY_UP) || IsKeyDown(KEY_W))
             {
+                PlaySound(menuEffect);
                 canSwitchMenu = false;
                 if (selectedGameModeMenu == MENU_CLASSIC)
                 {
@@ -68,6 +69,7 @@ void UpdateTitleScreen(void)
             {
                 if (IsKeyDown(KEY_ENTER))
                 {
+                    PlaySound(menuEffect);
                     if (selectedGameModeMenu == MENU_CLASSIC)
                     {
                         gameMode = CLASSIC;
@@ -90,6 +92,7 @@ void UpdateTitleScreen(void)
         {
             if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S))
             {
+                PlaySound(menuEffect);
                 canSwitchMenu = false;
                 switch (menuSelection)
                 {
@@ -110,6 +113,7 @@ void UpdateTitleScreen(void)
 
             if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W))
             {
+                PlaySound(menuEffect);
                 canSwitchMenu = false;
                 switch (menuSelection)
                 {
@@ -130,6 +134,7 @@ void UpdateTitleScreen(void)
 		
             if (IsKeyPressed(KEY_ENTER))
             {
+                PlaySound(menuEffect);
                 canSelectMenu = false;
 				
                 switch (menuSelection)
@@ -145,8 +150,8 @@ void UpdateTitleScreen(void)
 
                     UnloadFont(font);
                     UnloadMusicStream(music);
-                    UnloadSound(fxCoin);
-
+                    UnloadSound(menuEffect);
+					
                     CloseAudioDevice();
 
                     CloseWindow();

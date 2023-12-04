@@ -30,7 +30,7 @@
 GameScreen currentScreen = TITLE;
 Font font = { 0 };
 Music music = { 0 };
-Sound fxCoin = { 0 };
+Sound menuEffect = { 0 };
 int screenWidth = 640;
 int screenHeight = 360;
 int gridSize = screenWidth / maxGridSizeWidth;
@@ -66,7 +66,7 @@ int main(void)
     // Load global data (assets that must be available in all screens, i.e. font)
     font = LoadFont("resources/mecha.png");
     music = LoadMusicStream("resources/ambient.ogg");
-    fxCoin = LoadSound("resources/coin.wav");
+    menuEffect = LoadSound("resources/menuSelect.wav");
 
     SetMusicVolume(music, 1.0f);
     PlayMusicStream(music);
@@ -101,7 +101,7 @@ int main(void)
     // Unload global data loaded
     UnloadFont(font);
     UnloadMusicStream(music);
-    UnloadSound(fxCoin);
+    UnloadSound(menuEffect);
 
     CloseAudioDevice();     // Close audio context
 
